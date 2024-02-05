@@ -1,4 +1,4 @@
-rootProject.name = "kmp-gradle-skeleton"
+rootProject.name = "kmp-for-mobile-native-developers"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
