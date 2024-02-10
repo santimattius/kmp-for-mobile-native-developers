@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-class AndroidGameRemoteDataSources() : GameRemoteDataSources {
+class AndroidGameRemoteDataSources : GameRemoteDataSources {
 
     private val client = OkHttpClient().newBuilder()
         .build()
@@ -20,10 +20,12 @@ class AndroidGameRemoteDataSources() : GameRemoteDataSources {
 
     private val services = retrofit.create<GameServices>()
 
-    override suspend fun getGames(): Result<GameResponse> = runCatching {
-        val games = services.getGames()
-        val jsonElement = Json.parseToJsonElement(games)
-        Json.decodeFromJsonElement<GameResponse>(jsonElement)
+    override suspend fun getGames(): Result<GameResponse>{
+        return runCatching {
+            val games = services.getGames()
+            val jsonElement = Json.parseToJsonElement(games)
+            Json.decodeFromJsonElement<GameResponse>(jsonElement)
+        }
     }
 
     companion object {

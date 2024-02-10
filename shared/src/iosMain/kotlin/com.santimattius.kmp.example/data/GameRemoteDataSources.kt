@@ -16,12 +16,11 @@ import kotlin.coroutines.suspendCoroutine
 
 class IOSGameRemoteDataSources : GameRemoteDataSources {
 
-    override suspend fun getGames(): Result<GameResponse> = runCatching {
-        val jsonString = fetch()
-        Json.decodeFromString<GameResponse>(jsonString)
-    }.run {
-        print(this.toString())
-        this
+    override suspend fun getGames(): Result<GameResponse> {
+        return runCatching {
+            val jsonString = fetch()
+            Json.decodeFromString<GameResponse>(jsonString)
+        }
     }
 
     private suspend fun fetch(): String {
