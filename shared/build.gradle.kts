@@ -1,18 +1,22 @@
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.sqldelight)
 }
+
+//group = "com.santimattius.kmp.entertainment"
+//version = "1.0-SNAPSHOT"
 
 kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = JavaVersion.VERSION_1_8.toString()
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -23,12 +27,42 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
+            implementation(libs.kotlinx.coroutines.core)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
+            implementation(libs.sqldelight.coroutines.extensions)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.sqldelight.android.driver)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+            implementation(libs.sqldelight.ios.driver)
+
         }
     }
+}
+
+sqldelight {
+    databases {
+        create("GameDatabase") {
+            packageName.set("com.santimattius.kmp")
+        }
+    }
+
+    linkSqlite.set(true)
+
 }
 
 android {

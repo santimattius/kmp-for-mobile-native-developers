@@ -18,7 +18,7 @@ compose-plugin = "1.5.11"
 
 kotlinxCoroutines = "1.7.3"
 
-ktorVersion = "2.3.6"
+ktorVersion = "2.3.7"
 
 sqldelightVersion = "2.0.0"
 
@@ -72,3 +72,5 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelightVersion" }
