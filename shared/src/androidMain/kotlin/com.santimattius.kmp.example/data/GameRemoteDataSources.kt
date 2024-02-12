@@ -2,25 +2,14 @@ package com.santimattius.kmp.example.data
 
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class AndroidGameRemoteDataSources : GameRemoteDataSources {
 
-    private val client = OkHttpClient().newBuilder()
-        .build()
+    private val client = RetrofitClient(baseUrl)
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .client(client)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    private val services = client.create<GameServices>()
 
-    private val services = retrofit.create<GameServices>()
-
-    override suspend fun getGames(): Result<GameResponse>{
+    override suspend fun getGames(): Result<GameResponse> {
         return runCatching {
             val games = services.getGames()
             val jsonElement = Json.parseToJsonElement(games)

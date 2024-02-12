@@ -1,3 +1,5 @@
+package com.santimattius.kmp.example
+
 import android.os.Build
 
 class AndroidPlatform : Platform {

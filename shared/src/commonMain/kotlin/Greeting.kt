@@ -1,3 +1,5 @@
+import com.santimattius.kmp.example.getPlatform
+
 class Greeting {
     private val platform = getPlatform()
 

@@ -5,12 +5,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-class RetrofitServiceCreator(val baseUrl: String) {
+class RetrofitClient(baseUrl: String) {
 
     private val client = OkHttpClient().newBuilder()
         .build()
 
-    val retrofit = Retrofit.Builder()
+    val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())

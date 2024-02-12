@@ -1,3 +1,5 @@
+package com.santimattius.kmp.example
+
 import platform.UIKit.UIDevice
 
 class IOSPlatform: Platform {
