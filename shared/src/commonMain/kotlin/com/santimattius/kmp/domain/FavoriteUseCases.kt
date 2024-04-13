@@ -1,9 +1,9 @@
 package com.santimattius.kmp.domain
 
-import com.santimattius.kmp.data.GameRepository
+import com.santimattius.kmp.data.CharacterRepository
 
 class AddToFavorite(
-    private val repository: GameRepository,
+    private val repository: CharacterRepository,
 ) {
 
     suspend operator fun invoke(id: Long): Result<Unit> {
@@ -13,7 +13,7 @@ class AddToFavorite(
 
 
 class RemoveFromFavorites(
-    private val repository: GameRepository,
+    private val repository: CharacterRepository,
 ) {
 
     suspend operator fun invoke(id: Long): Result<Unit> {

@@ -5,9 +5,6 @@ plugins {
     alias(libs.plugins.sqldelight)
 }
 
-//group = "com.santimattius.kmp.entertainment"
-//version = "1.0-SNAPSHOT"
-
 kotlin {
     androidTarget {
         compilations.all {
@@ -31,7 +28,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.logging)
@@ -56,7 +52,7 @@ kotlin {
 
 sqldelight {
     databases {
-        create("GameDatabase") {
+        create("CharactersDatabase") {
             packageName.set("com.santimattius.kmp")
         }
     }

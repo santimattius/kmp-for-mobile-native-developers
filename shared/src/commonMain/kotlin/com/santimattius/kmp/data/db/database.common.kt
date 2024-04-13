@@ -1,14 +1,14 @@
 package com.santimattius.kmp.data.db
 
 import app.cash.sqldelight.db.SqlDriver
-import com.santimattius.kmp.Game
-import com.santimattius.kmp.GameDatabase
+import com.santimattius.kmp.Character
+import com.santimattius.kmp.CharactersDatabase
 
 expect class DriverFactory {
     fun createDriver(): SqlDriver
 }
 
-fun createDatabase(driverFactory: DriverFactory): GameDatabase {
+fun createDatabase(driverFactory: DriverFactory): CharactersDatabase {
     val driver = driverFactory.createDriver()
-    return GameDatabase(driver, Game.Adapter(booleanColumnAdapter))
+    return CharactersDatabase(driver, Character.Adapter(booleanColumnAdapter))
 }

@@ -1,0 +1,25 @@
+CREATE TABLE Character (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    image TEXT NOT NULL,
+    favorite INTEGER AS Boolean DEFAULT 0
+);
+
+selectAllCharacter:
+SELECT * FROM Character;
+
+selectFavoriteCharacters:
+SELECT * FROM Character WHERE favorite = 1;
+
+insertCharacter:
+INSERT INTO Character(id,name,image)
+VALUES(?, ?, ?);
+
+selectCharacterById:
+SELECT * FROM Character
+WHERE id = ?;
+
+updateFavorite:
+UPDATE Character
+SET favorite = ?
+WHERE id = ? ;

@@ -1,5 +1,5 @@
 package com.santimattius.kmp.data.db
 
-import com.santimattius.kmp.Game
+import com.santimattius.kmp.Character
 
-typealias GameEntity = Game
+typealias CharacterEntity = Character
