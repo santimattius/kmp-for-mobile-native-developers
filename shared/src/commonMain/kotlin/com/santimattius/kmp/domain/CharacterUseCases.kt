@@ -17,3 +17,10 @@ class FindCharacterById(
         return repository.findById(id)
     }
 }
+
+class RefreshCharacters(
+    private val repository: CharacterRepository,
+) {
+
+    suspend operator fun invoke() = repository.fetch()
+}

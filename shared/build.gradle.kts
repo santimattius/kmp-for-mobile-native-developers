@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.skie)
 }
 
 kotlin {
@@ -34,12 +35,17 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
 
             implementation(libs.sqldelight.coroutines.extensions)
+
+            implementation(libs.koin.core)
+
+            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-beta01")
         }
 
         androidMain.dependencies {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqldelight.android.driver)
+            implementation(libs.koin.android)
         }
 
         iosMain.dependencies {
