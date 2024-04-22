@@ -38,7 +38,7 @@ kotlin {
 
             implementation(libs.koin.core)
 
-            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-beta01")
+            implementation(libs.androidx.lifecycle.viewmodel)
         }
 
         androidMain.dependencies {

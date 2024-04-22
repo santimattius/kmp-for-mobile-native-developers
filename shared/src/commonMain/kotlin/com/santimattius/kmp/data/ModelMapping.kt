@@ -4,7 +4,6 @@ import com.santimattius.kmp.data.db.CharacterEntity
 import com.santimattius.kmp.domain.Character
 
 
-fun List<NetworkCharacter>.asDomainsModels() = this.map { it.asDomainModel() }
 fun NetworkCharacter.asDomainModel(): Character {
     return Character(id, name, image)
 }

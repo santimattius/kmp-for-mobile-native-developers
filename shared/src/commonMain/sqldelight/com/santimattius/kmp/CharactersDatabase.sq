@@ -1,3 +1,5 @@
+import kotlin.Boolean;
+
 CREATE TABLE Character (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,

@@ -10,5 +10,5 @@ expect class DriverFactory {
 
 fun createDatabase(driverFactory: DriverFactory): CharactersDatabase {
     val driver = driverFactory.createDriver()
-    return CharactersDatabase(driver, Character.Adapter(booleanColumnAdapter))
+    return CharactersDatabase(driver)
 }
