@@ -1,6 +1,6 @@
 import kotlin.Boolean;
 
-CREATE TABLE Character (
+CREATE TABLE CharacterEntity (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     image TEXT NOT NULL,
@@ -8,20 +8,20 @@ CREATE TABLE Character (
 );
 
 selectAllCharacter:
-SELECT * FROM Character;
+SELECT * FROM CharacterEntity;
 
 selectFavoriteCharacters:
-SELECT * FROM Character WHERE favorite = 1;
+SELECT * FROM CharacterEntity WHERE favorite = 1;
 
 insertCharacter:
-INSERT INTO Character(id,name,image)
+INSERT INTO CharacterEntity(id,name,image)
 VALUES(?, ?, ?);
 
 selectCharacterById:
-SELECT * FROM Character
+SELECT * FROM CharacterEntity
 WHERE id = ?;
 
 updateFavorite:
-UPDATE Character
+UPDATE CharacterEntity
 SET favorite = ?
 WHERE id = ? ;

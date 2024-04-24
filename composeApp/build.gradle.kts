@@ -69,6 +69,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.compose)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+    implementation(libs.koin.compose)
+    implementation(libs.coil.compose)
+
     implementation(projects.shared)
 }
 

@@ -16,13 +16,13 @@ internal class KtorCharacterNetworkDataSource(
 ) : CharacterNetworkDataSource {
     override suspend fun find(id: Long): Result<NetworkCharacter> {
         return runCatching {
-            client.get("/character/${id}").body<NetworkCharacter>()
+            client.get("/api/character/${id}").body<NetworkCharacter>()
         }
     }
 
     override suspend fun all(): Result<List<NetworkCharacter>> {
         return runCatching {
-            val response = client.get("/character").body<CharactersResponse>()
+            val response = client.get("/api/character").body<CharactersResponse>()
             response.results
         }
     }

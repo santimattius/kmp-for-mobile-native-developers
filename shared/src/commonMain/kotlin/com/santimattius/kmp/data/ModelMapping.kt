@@ -1,6 +1,6 @@
 package com.santimattius.kmp.data
 
-import com.santimattius.kmp.data.db.CharacterEntity
+import com.santimattius.kmp.CharacterEntity
 import com.santimattius.kmp.domain.Character
 
 

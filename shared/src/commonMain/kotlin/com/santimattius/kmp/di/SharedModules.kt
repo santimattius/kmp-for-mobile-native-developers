@@ -17,7 +17,7 @@ import org.koin.dsl.module
 
 val sharedModule = module {
 
-    single { apiClient("") }
+    single { apiClient("https://rickandmortyapi.com") }
     single<CharacterNetworkDataSource> { KtorCharacterNetworkDataSource(get()) }
     single<CharactersDatabase> { createDatabase(get()) }
     single<CharacterLocalDataSource> { SQLDelightCharacterLocalDataSource(db = get()) }
