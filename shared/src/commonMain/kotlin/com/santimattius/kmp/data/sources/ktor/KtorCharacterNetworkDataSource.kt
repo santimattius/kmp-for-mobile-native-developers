@@ -12,7 +12,6 @@ import kotlinx.coroutines.IO
 
 internal class KtorCharacterNetworkDataSource(
     private val client: HttpClient,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : CharacterNetworkDataSource {
     override suspend fun find(id: Long): Result<NetworkCharacter> {
         return runCatching {
