@@ -1,21 +1,19 @@
-package com.santimattius.kmp.integration.domain
+package com.santimattius.kmp.integration.data.network
 
-import dev.mokkery.MockMode
-import dev.mokkery.answering.returns
-import dev.mokkery.every
-import dev.mokkery.mock
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.HttpRequestData
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.fullPath
 import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.serialization.json.Json
 
-fun testKtorClient(mockClient: MockClient = MockClient()) = HttpClient(mockClient.engine){
+fun testKtorClient(mockClient: MockClient = MockClient()) = HttpClient(mockClient.engine) {
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true
@@ -24,8 +22,9 @@ fun testKtorClient(mockClient: MockClient = MockClient()) = HttpClient(mockClien
         })
     }
 }
-private fun testKtorEngine(interceptor: ResponseInterceptor) = MockEngine { _ ->
-    val response = interceptor.intercept()
+
+private fun testKtorEngine(interceptor: ResponseInterceptor) = MockEngine { request ->
+    val response = interceptor.intercept(request)
     respond(
         content = ByteReadChannel(response.content),
         status = response.status,
@@ -33,19 +32,27 @@ private fun testKtorEngine(interceptor: ResponseInterceptor) = MockEngine { _ ->
     )
 }
 
-class MockClient {
-    private val interceptor = mock<ResponseInterceptor>(mode = MockMode.autoUnit)
-    val engine = testKtorEngine(interceptor)
+class MockClient(
+    private val defaultResponse: MockResponse = DefaultMockResponse(
+        status = HttpStatusCode.OK,
+        content = ""
+    ),
+) : ResponseInterceptor {
 
-    fun intercept(response: MockResponse) {
-        every {
-            interceptor.intercept()
-        } returns response
+    private var _call: (String) -> MockResponse = { defaultResponse }
+    val engine = testKtorEngine(this)
+
+    fun setResponse(response: MockResponse) {
+        _call = { response }
+    }
+
+    override fun intercept(request: HttpRequestData): MockResponse {
+        return _call.invoke(request.url.fullPath)
     }
 }
 
 interface ResponseInterceptor {
-    fun intercept(): MockResponse
+    fun intercept(request: HttpRequestData): MockResponse
 }
 
 data class DefaultMockResponse(

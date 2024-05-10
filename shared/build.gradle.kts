@@ -64,6 +64,8 @@ kotlin {
             implementation(libs.ktor.client.mock)
 
             implementation(libs.androidx.lifecycle.viewmodel)
+
+            implementation(libs.koin.test)
         }
 
         androidMain.dependencies {
@@ -78,6 +80,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation(libs.junit)
+                implementation(libs.sqldelight.jvm)
             }
         }
 

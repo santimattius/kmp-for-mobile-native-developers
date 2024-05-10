@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 internal class SQLDelightCharacterLocalDataSource(
-    private val db: CharactersDatabase,
+    db: CharactersDatabase,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : CharacterLocalDataSource {
 
@@ -46,5 +46,9 @@ internal class SQLDelightCharacterLocalDataSource(
     override suspend fun insert(character: Character): Result<Unit> = runCatching {
         val (id, title, image) = character
         queries.insertCharacter(id, title, image)
+    }
+
+    override suspend fun clear(): Result<Unit> = runCatching {
+        queries.deleteAll()
     }
 }

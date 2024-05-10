@@ -66,9 +66,10 @@ class InMemoryCharacterLocalDataSource : CharacterLocalDataSource {
         _flow.update { characters }
     }
 
-    fun clear() {
+    override suspend fun clear() = runCatching {
         characters.clear()
         favorites.clear()
+        refresh()
     }
 
 }

@@ -13,7 +13,6 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 internal fun apiClient(baseUrl: String) = HttpClient {
-
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true

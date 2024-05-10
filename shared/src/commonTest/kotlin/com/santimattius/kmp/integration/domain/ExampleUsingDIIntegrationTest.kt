@@ -2,46 +2,57 @@ package com.santimattius.kmp.integration.domain
 
 import app.cash.turbine.test
 import com.santimattius.kmp.JsonLoader
-import com.santimattius.kmp.data.CharacterRepository
-import com.santimattius.kmp.data.db.createDatabase
-import com.santimattius.kmp.data.sources.ktor.KtorCharacterNetworkDataSource
-import com.santimattius.kmp.data.sources.sqldelight.SQLDelightCharacterLocalDataSource
+import com.santimattius.kmp.data.sources.CharacterLocalDataSource
+import com.santimattius.kmp.di.sharedModule
 import com.santimattius.kmp.domain.RefreshCharacters
-import com.santimattius.kmp.integration.data.db.testDbDriver
 import com.santimattius.kmp.integration.data.network.DefaultMockResponse
 import com.santimattius.kmp.integration.data.network.MockClient
 import com.santimattius.kmp.integration.data.network.testKtorClient
-import com.santimattius.kmp.unit.data.sources.InMemoryCharacterLocalDataSource
-import io.kotest.common.runBlocking
+import com.santimattius.kmp.integration.di.stopTestKoin
+import com.santimattius.kmp.integration.di.testPlatformModule
+import io.ktor.client.HttpClient
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
+import org.koin.core.component.get
+import org.koin.core.context.startKoin
+import org.koin.test.KoinTest
+import org.koin.test.inject
 import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class RefreshCharactersIntegrationTest {
+class ExampleUsingDIIntegrationTest : KoinTest {
 
     private val jsonResponse = JsonLoader.load("characters.json")
 
     //KtorClient setup
-    private val mockClient = MockClient()
-    private val ktorClient = testKtorClient(mockClient)
-    private val networkDataSource = KtorCharacterNetworkDataSource(ktorClient)
+    private val mockClient: MockClient by inject()
 
-    //SQLDelight setup
-    private val db = createDatabase(driver = testDbDriver())
-    private val localDataSource = SQLDelightCharacterLocalDataSource(db)
-    private val repository = CharacterRepository(localDataSource, networkDataSource)
+    @BeforeTest
+    fun setUp() {
+        startKoin {
+            modules(
+                testPlatformModule,
+                sharedModule
+            )
+        }
+    }
 
-    private val refreshCharacters = RefreshCharacters(repository)
+    @AfterTest
+    fun tearDown() {
+        stopTestKoin()
+    }
 
     @Test
     fun `When I call refresh update the local storage`() = runTest {
         //Given
+        val useCase = get<RefreshCharacters>()
+        val localDataSource = get<CharacterLocalDataSource>()
         val response = DefaultMockResponse(jsonResponse, HttpStatusCode.OK)
         mockClient.setResponse(response)
         //When
-        refreshCharacters.invoke()
+        useCase.invoke()
         //Then
         localDataSource.all.test {
             assertEquals(true, awaitItem().isNotEmpty())
@@ -51,10 +62,12 @@ class RefreshCharactersIntegrationTest {
     @Test
     fun `When the service returns an empty response`() = runTest {
         //Given
+        val useCase = get<RefreshCharacters>()
+        val localDataSource = get<CharacterLocalDataSource>()
         val response = DefaultMockResponse("{}", HttpStatusCode.OK)
         mockClient.setResponse(response)
         //When
-        refreshCharacters.invoke()
+        useCase.invoke()
 
         localDataSource.all.test {
             assertEquals(true, awaitItem().isEmpty())
