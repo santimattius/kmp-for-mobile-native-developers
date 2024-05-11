@@ -13,18 +13,21 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.serialization.json.Json
 
-fun testKtorClient(mockClient: MockClient = MockClient()) = HttpClient(mockClient.engine) {
-    install(ContentNegotiation) {
-        json(Json {
-            prettyPrint = true
-            isLenient = true
-            ignoreUnknownKeys = true
-        })
+fun testKtorClient(mockClient: MockClient = MockClient()): HttpClient {
+    val engine = testKtorEngine(mockClient)
+    return HttpClient(engine) {
+        install(ContentNegotiation) {
+            json(Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+            })
+        }
     }
 }
 
 private fun testKtorEngine(interceptor: ResponseInterceptor) = MockEngine { request ->
-    val response = interceptor.intercept(request)
+    val response = interceptor(request)
     respond(
         content = ByteReadChannel(response.content),
         status = response.status,
@@ -33,34 +36,31 @@ private fun testKtorEngine(interceptor: ResponseInterceptor) = MockEngine { requ
 }
 
 class MockClient(
-    private val defaultResponse: MockResponse = DefaultMockResponse(
-        status = HttpStatusCode.OK,
-        content = ""
-    ),
+    private val defaultResponse: MockResponse = MockResponse.default(),
 ) : ResponseInterceptor {
 
     private var _call: (String) -> MockResponse = { defaultResponse }
-    val engine = testKtorEngine(this)
 
     fun setResponse(response: MockResponse) {
         _call = { response }
     }
 
-    override fun intercept(request: HttpRequestData): MockResponse {
+    override fun invoke(request: HttpRequestData): MockResponse {
         return _call.invoke(request.url.fullPath)
     }
 }
 
-interface ResponseInterceptor {
-    fun intercept(request: HttpRequestData): MockResponse
+fun interface ResponseInterceptor {
+    operator fun invoke(request: HttpRequestData): MockResponse
 }
 
-data class DefaultMockResponse(
-    override val content: String,
-    override val status: HttpStatusCode
-) : MockResponse
-
-interface MockResponse {
-    val content: String
+data class MockResponse(
+    val content: String,
     val status: HttpStatusCode
+) {
+    companion object {
+        fun ok(content: String) = MockResponse(content, HttpStatusCode.OK)
+        fun default() = ok("{}")
+    }
+
 }

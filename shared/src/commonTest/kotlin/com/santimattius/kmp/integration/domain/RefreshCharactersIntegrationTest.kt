@@ -8,14 +8,10 @@ import com.santimattius.kmp.data.sources.ktor.KtorCharacterNetworkDataSource
 import com.santimattius.kmp.data.sources.sqldelight.SQLDelightCharacterLocalDataSource
 import com.santimattius.kmp.domain.RefreshCharacters
 import com.santimattius.kmp.integration.data.db.testDbDriver
-import com.santimattius.kmp.integration.data.network.DefaultMockResponse
 import com.santimattius.kmp.integration.data.network.MockClient
+import com.santimattius.kmp.integration.data.network.MockResponse
 import com.santimattius.kmp.integration.data.network.testKtorClient
-import com.santimattius.kmp.unit.data.sources.InMemoryCharacterLocalDataSource
-import io.kotest.common.runBlocking
-import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
-import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -29,7 +25,8 @@ class RefreshCharactersIntegrationTest {
     private val networkDataSource = KtorCharacterNetworkDataSource(ktorClient)
 
     //SQLDelight setup
-    private val db = createDatabase(driver = testDbDriver())
+    private val sqlDriver = testDbDriver()
+    private val db = createDatabase(driver = sqlDriver)
     private val localDataSource = SQLDelightCharacterLocalDataSource(db)
     private val repository = CharacterRepository(localDataSource, networkDataSource)
 
@@ -38,7 +35,7 @@ class RefreshCharactersIntegrationTest {
     @Test
     fun `When I call refresh update the local storage`() = runTest {
         //Given
-        val response = DefaultMockResponse(jsonResponse, HttpStatusCode.OK)
+        val response = MockResponse.ok(jsonResponse)
         mockClient.setResponse(response)
         //When
         refreshCharacters.invoke()
@@ -51,7 +48,7 @@ class RefreshCharactersIntegrationTest {
     @Test
     fun `When the service returns an empty response`() = runTest {
         //Given
-        val response = DefaultMockResponse("{}", HttpStatusCode.OK)
+        val response = MockResponse.default()
         mockClient.setResponse(response)
         //When
         refreshCharacters.invoke()

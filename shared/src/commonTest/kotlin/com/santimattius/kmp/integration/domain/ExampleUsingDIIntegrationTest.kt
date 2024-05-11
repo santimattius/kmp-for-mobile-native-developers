@@ -5,12 +5,10 @@ import com.santimattius.kmp.JsonLoader
 import com.santimattius.kmp.data.sources.CharacterLocalDataSource
 import com.santimattius.kmp.di.sharedModule
 import com.santimattius.kmp.domain.RefreshCharacters
-import com.santimattius.kmp.integration.data.network.DefaultMockResponse
 import com.santimattius.kmp.integration.data.network.MockClient
-import com.santimattius.kmp.integration.data.network.testKtorClient
+import com.santimattius.kmp.integration.data.network.MockResponse
 import com.santimattius.kmp.integration.di.stopTestKoin
 import com.santimattius.kmp.integration.di.testPlatformModule
-import io.ktor.client.HttpClient
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
 import org.koin.core.component.get
@@ -49,7 +47,7 @@ class ExampleUsingDIIntegrationTest : KoinTest {
         //Given
         val useCase = get<RefreshCharacters>()
         val localDataSource = get<CharacterLocalDataSource>()
-        val response = DefaultMockResponse(jsonResponse, HttpStatusCode.OK)
+        val response = MockResponse.ok(jsonResponse)
         mockClient.setResponse(response)
         //When
         useCase.invoke()
@@ -64,7 +62,7 @@ class ExampleUsingDIIntegrationTest : KoinTest {
         //Given
         val useCase = get<RefreshCharacters>()
         val localDataSource = get<CharacterLocalDataSource>()
-        val response = DefaultMockResponse("{}", HttpStatusCode.OK)
+        val response = MockResponse.default()
         mockClient.setResponse(response)
         //When
         useCase.invoke()
