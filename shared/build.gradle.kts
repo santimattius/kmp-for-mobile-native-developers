@@ -63,8 +63,6 @@ kotlin {
 
             implementation(libs.ktor.client.mock)
 
-            implementation(libs.androidx.lifecycle.viewmodel)
-
             implementation(libs.koin.test)
         }
 
