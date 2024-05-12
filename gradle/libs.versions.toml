@@ -1,9 +1,12 @@
 [versions]
 agp = "8.2.2"
-coilCompose = "2.6.0"
-junit = "4.13.2"
-kotestFrameworkEngine = "5.8.1"
 kotlin = "1.9.23"
+sqldelightVersion = "2.0.1"
+skieVersion = "0.6.4"
+kotestVersion = "5.8.1"
+testResourceVersion = "0.4.1"
+mokkeryVersion = "1.9.23-1.7.0"
+koverVersion = "0.7.6"
 
 android-compileSdk = "34"
 android-minSdk = "24"
@@ -18,14 +21,11 @@ androidxLifecycle = "2.8.0-rc01"
 kotlinxCoroutines = "1.8.0"
 ktorVersion = "2.3.10"
 
-sqldelightVersion = "2.0.1"
-skieVersion = "0.6.4"
-
 koinVersion = "3.5.6"
+coilCompose = "2.6.0"
 
-testResourceVersion = "0.4.1"
-kotestVersion = "5.8.1"
-mokkeryVersion = "1.9.23-1.7.0"
+junit = "4.13.2"
+kotestFrameworkEngine = "5.8.1"
 turbine = "1.1.0"
 
 [libraries]
@@ -96,3 +96,4 @@ skie = { id = "co.touchlab.skie", version.ref = "skieVersion" }
 test-resources = { id = "com.goncalossilva.resources", version.ref = "testResourceVersion" }
 kotest = { id = "io.kotest.multiplatform", version.ref = "kotestVersion" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkeryVersion" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref="koverVersion" }

@@ -24,7 +24,6 @@ class ExampleUsingDIIntegrationTest : KoinTest {
 
     private val jsonResponse = JsonLoader.load("characters.json")
 
-    //KtorClient setup
     private val mockClient: MockClient by inject()
 
     @BeforeTest

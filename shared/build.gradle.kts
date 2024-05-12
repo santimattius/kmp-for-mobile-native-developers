@@ -1,3 +1,6 @@
+import kotlinx.kover.gradle.plugin.dsl.AggregationType
+import kotlinx.kover.gradle.plugin.dsl.MetricType
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -7,6 +10,7 @@ plugins {
     alias(libs.plugins.test.resources)
     alias(libs.plugins.kotest)
     alias(libs.plugins.mokkery)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
@@ -99,6 +103,28 @@ sqldelight {
 
     linkSqlite.set(true)
 
+}
+
+koverReport {
+    verify {
+        rule("Basic Line Coverage") {
+            isEnabled = true
+            bound {
+                minValue = 80 // Minimum coverage percentage
+                maxValue = 100 // Maximum coverage percentage (optional)
+                metric = MetricType.LINE
+                aggregation = AggregationType.COVERED_PERCENTAGE
+            }
+        }
+
+        rule("Branch Coverage") {
+            isEnabled = true
+            bound {
+                minValue = 70 // Minimum coverage percentage for branches
+                metric = MetricType.BRANCH
+            }
+        }
+    }
 }
 
 android {
