@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_min_width">120dp</dimen>
+    <dimen name="x_small">8dp</dimen>
+    <dimen name="small">4dp</dimen>
+</resources>
