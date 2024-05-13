@@ -7,7 +7,6 @@ expect class DriverFactory {
     fun createDriver(): SqlDriver
 }
 
-fun createDatabase(driverFactory: DriverFactory): CharactersDatabase {
-    val driver = driverFactory.createDriver()
+fun createDatabase(driver: SqlDriver): CharactersDatabase {
     return CharactersDatabase(driver)
 }

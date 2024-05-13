@@ -25,3 +25,6 @@ updateFavorite:
 UPDATE CharacterEntity
 SET favorite = ?
 WHERE id = ? ;
+
+deleteAll:
+DELETE FROM CharacterEntity;
