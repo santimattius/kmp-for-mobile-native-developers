@@ -1,4 +1,4 @@
-package com.santimattius.kmp.skeleton.ui
+package com.santimattius.kmp.skeleton.core.ui
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ExperimentalMaterial3Api

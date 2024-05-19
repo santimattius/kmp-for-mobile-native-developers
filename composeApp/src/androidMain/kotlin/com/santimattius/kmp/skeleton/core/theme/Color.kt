@@ -1,4 +1,4 @@
-package com.santimattius.kmp.skeleton.theme
+package com.santimattius.kmp.skeleton.core.theme
 
 import androidx.compose.ui.graphics.Color
 
