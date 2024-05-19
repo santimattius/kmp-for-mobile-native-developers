@@ -1,4 +1,12 @@
 # KMP for Mobile Native Developers
+Accompanying project for the articles in the KMP for Native Mobile Developers series.
+
+- [Part. 1: The beginning](https://medium.com/@santimattius/kmp-for-mobile-native-developer-part-1-b2856170e548) 
+- [Part. 2: Project and Concepts](https://medium.com/@santimattius/kmp-for-mobile-native-developer-part-2-project-and-concepts-191a85e0c609)
+- [Part. 3: Dependency Injection](https://medium.com/@santimattius/kmp-for-mobile-native-developer-part-3-dependency-injection-in-kotlin-multiplatform-kmp-15f9c97cfb09) 
+- [Part. 4: Modularization](https://medium.com/@santimattius/kmp-for-mobile-native-developer-part-4-modularization-7b712a5d5e99)
+- [Part. 5: Testing](https://medium.com/@santimattius/kmp-for-mobile-native-developers-part-5-testing-46e150d26750)
+## Project
 
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
