@@ -15,7 +15,16 @@ struct ContentView: View {
             ScrollView{
                 LazyVGrid(columns: columns, spacing: 20){
                     ForEach(characters, id: \.id){ item in
-                        CharacterImageView(imageUrl: item.image)
+                        ZStack(alignment: .bottomTrailing) {
+                              CharacterImageView(imageUrl: item.image)
+
+                            Button(action: {viewModel.addToFavorites(character: item)}) {
+                                  Image(systemName: item.isFavorite ? "heart.fill" : "heart")
+                                      .foregroundColor(item.isFavorite ? .red : .white)
+                                      .padding()
+                              }
+                        }
+                  
                     }
                 }
             }
@@ -26,6 +35,14 @@ struct ContentView: View {
             }
             .padding()
             .navigationTitle("Rick and Morty")
+            .toolbar{
+                let favoriteViewModel = Injector.shared.provideFavoritesViewModel()
+                NavigationLink(destination: FavoriteView(viewModel: favoriteViewModel)) {
+                            Image(systemName: "heart.fill" )
+                                .foregroundColor(.black)
+                                .padding()
+                        }.isDetailLink(false)
+            }
         }
     }
 }

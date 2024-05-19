@@ -5,10 +5,10 @@ import com.santimattius.kmp.domain.Character
 
 
 fun NetworkCharacter.asDomainModel(): Character {
-    return Character(id, name, image)
+    return Character(id, name, image, false)
 }
 
 fun List<CharacterEntity>.asDomainsModels() = this.map { it.asDomainModel() }
 fun CharacterEntity.asDomainModel(): Character {
-    return Character(id, name, image)
+    return Character(id, name, image, favorite ?: false)
 }

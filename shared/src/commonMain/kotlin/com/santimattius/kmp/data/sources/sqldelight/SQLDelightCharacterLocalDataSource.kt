@@ -28,6 +28,14 @@ internal class SQLDelightCharacterLocalDataSource(
                 it.asDomainsModels()
             }
 
+    override val favorites: Flow<List<Character>>
+        get() = queries.selectFavoriteCharacters()
+            .asFlow()
+            .mapToList(dispatcher)
+            .map {
+                it.asDomainsModels()
+            }
+
     override suspend fun find(id: Long): Result<Character> {
         return runCatching {
             val entity = queries.selectCharacterById(id).executeAsOne()

@@ -13,6 +13,9 @@ class CharacterRepository(
     val allCharacters: Flow<List<Character>>
         get() = local.all
 
+    val allFavoritesCharacters: Flow<List<Character>>
+        get() = local.favorites
+
     suspend fun fetch(): Result<Unit> {
         return network.all().fold(onSuccess = {
             it.forEach { network ->

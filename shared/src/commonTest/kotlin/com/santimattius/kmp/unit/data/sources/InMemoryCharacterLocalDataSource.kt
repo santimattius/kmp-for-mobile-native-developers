@@ -2,12 +2,8 @@ package com.santimattius.kmp.unit.data.sources
 
 import com.santimattius.kmp.data.sources.CharacterLocalDataSource
 import com.santimattius.kmp.domain.Character
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -16,23 +12,26 @@ class InMemoryCharacterLocalDataSource : CharacterLocalDataSource {
 
     private val mutex = Mutex()
 
-    private val characters = mutableListOf<Character>()
-    private val favorites = mutableListOf<Character>()
+    private val _characters = mutableListOf<Character>()
+    private val _favorites = mutableListOf<Character>()
 
-    private val _flow = MutableStateFlow(characters)
+    private val _flowAll = MutableStateFlow(_characters)
+    private val _flowFavorites = MutableStateFlow(_favorites)
     override val all: Flow<List<Character>>
-        get() = _flow
+        get() = _flowAll
+    override val favorites: Flow<List<Character>>
+        get() = _flowFavorites
 
     override suspend fun find(id: Long): Result<Character> {
         return runCatching {
-            mutex.withLock { characters.first { it.id == id } }
+            mutex.withLock { _characters.first { it.id == id } }
         }
     }
 
     override suspend fun addToFavorite(id: Long): Result<Unit> {
         return find(id).fold(
             onSuccess = {
-                favorites.add(it)
+                _favorites.add(it)
                 refresh()
                 Result.success(Unit)
             }, onFailure = {
@@ -44,7 +43,7 @@ class InMemoryCharacterLocalDataSource : CharacterLocalDataSource {
     override suspend fun removeToFavorite(id: Long): Result<Unit> {
         return find(id).fold(
             onSuccess = {
-                favorites.remove(it)
+                _favorites.remove(it)
                 refresh()
                 Result.success(Unit)
             }, onFailure = {
@@ -56,19 +55,19 @@ class InMemoryCharacterLocalDataSource : CharacterLocalDataSource {
     override suspend fun insert(character: Character): Result<Unit> {
         return runCatching {
             mutex.withLock {
-                characters.add(character)
+                _characters.add(character)
                 refresh()
             }
         }
     }
 
     private fun refresh() {
-        _flow.update { characters }
+        _flowAll.update { _characters }
     }
 
     override suspend fun clear() = runCatching {
-        characters.clear()
-        favorites.clear()
+        _characters.clear()
+        _favorites.clear()
         refresh()
     }
 

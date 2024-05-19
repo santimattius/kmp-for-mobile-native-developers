@@ -1,4 +1,4 @@
-package com.santimattius.kmp.skeleton.theme
+package com.santimattius.kmp.skeleton.core.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
