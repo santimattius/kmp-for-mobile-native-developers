@@ -1,14 +1,11 @@
-package com.santimattius.kmp.data.sources.ktor
+package com.santimattius.kmp.core.sources.ktor
 
-import com.santimattius.kmp.data.CharactersResponse
-import com.santimattius.kmp.data.NetworkCharacter
-import com.santimattius.kmp.data.sources.CharacterNetworkDataSource
+import com.santimattius.kmp.core.CharactersResponse
+import com.santimattius.kmp.core.NetworkCharacter
+import com.santimattius.kmp.core.sources.CharacterNetworkDataSource
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 
 internal class KtorCharacterNetworkDataSource(
     private val client: HttpClient,

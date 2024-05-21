@@ -1,4 +1,4 @@
-package com.santimattius.kmp.data.sources
+package com.santimattius.kmp.core.sources
 
 import com.santimattius.kmp.domain.Character
 import kotlinx.coroutines.flow.Flow

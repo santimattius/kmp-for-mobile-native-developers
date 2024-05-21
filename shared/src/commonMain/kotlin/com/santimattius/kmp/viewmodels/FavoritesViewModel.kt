@@ -2,7 +2,7 @@ package com.santimattius.kmp.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.santimattius.kmp.data.CharacterRepository
+import com.santimattius.kmp.core.CharacterRepository
 import com.santimattius.kmp.domain.Character
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

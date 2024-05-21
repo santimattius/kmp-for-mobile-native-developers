@@ -1,7 +1,7 @@
 package com.santimattius.kmp.unit.viewmodels
 
 import app.cash.turbine.test
-import com.santimattius.kmp.data.CharacterRepository
+import com.santimattius.kmp.core.CharacterRepository
 import com.santimattius.kmp.domain.AddToFavorite
 import com.santimattius.kmp.unit.data.sources.FakeCharacterNetworkDataSource
 import com.santimattius.kmp.unit.data.sources.InMemoryCharacterLocalDataSource
@@ -12,7 +12,6 @@ import com.santimattius.kmp.viewmodels.CharactersViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest

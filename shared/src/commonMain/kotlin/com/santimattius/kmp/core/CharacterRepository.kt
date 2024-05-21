@@ -1,7 +1,7 @@
-package com.santimattius.kmp.data
+package com.santimattius.kmp.core
 
-import com.santimattius.kmp.data.sources.CharacterLocalDataSource
-import com.santimattius.kmp.data.sources.CharacterNetworkDataSource
+import com.santimattius.kmp.core.sources.CharacterLocalDataSource
+import com.santimattius.kmp.core.sources.CharacterNetworkDataSource
 import com.santimattius.kmp.domain.Character
 import kotlinx.coroutines.flow.Flow
 

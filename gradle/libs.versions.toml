@@ -1,6 +1,7 @@
 [versions]
-agp = "8.2.2"
+agp = "8.2.0"
 kotlin = "1.9.23"
+ksp = "1.9.23-1.0.19"
 sqldelightVersion = "2.0.1"
 skieVersion = "0.6.4"
 kotestVersion = "5.8.1"
@@ -9,20 +10,23 @@ mokkeryVersion = "1.9.23-1.7.0"
 koverVersion = "0.7.6"
 
 android-compileSdk = "34"
-android-minSdk = "24"
+android-minSdk = "26"
 android-targetSdk = "34"
 
-androidxComposeCompiler = "1.5.12"
+androidxComposeCompiler = "1.5.11"
 androidxActivity = "1.9.0"
 androidxComposeBom = "2024.05.00"
-androidxNavigationCompose = "2.8.0-alpha08"
-androidxLifecycle = "2.8.0-rc01"
+androidxNavigationCompose = "2.8.0-beta01"
+androidxLifecycle = "2.8.0"
 
 kotlinxCoroutines = "1.8.0"
 ktorVersion = "2.3.10"
 
 koinVersion = "3.5.6"
 coilCompose = "2.6.0"
+
+androidx-room = "2.7.0-alpha02"
+sqlite = "2.5.0-SNAPSHOT"
 
 junit = "4.13.2"
 kotestFrameworkEngine = "5.8.1"
@@ -76,6 +80,12 @@ sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-ex
 sqldelight-ios-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelightVersion" }
 sqldelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelightVersion" }
 
+## Room
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
 #Koin
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinVersion" }
@@ -92,6 +102,8 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelightVersion" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "androidx-room" }
 skie = { id = "co.touchlab.skie", version.ref = "skieVersion" }
 test-resources = { id = "com.goncalossilva.resources", version.ref = "testResourceVersion" }
 kotest = { id = "io.kotest.multiplatform", version.ref = "kotestVersion" }

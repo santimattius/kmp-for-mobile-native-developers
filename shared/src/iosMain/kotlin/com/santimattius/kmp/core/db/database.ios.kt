@@ -1,4 +1,4 @@
-package com.santimattius.kmp.data.db
+package com.santimattius.kmp.core.db
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver

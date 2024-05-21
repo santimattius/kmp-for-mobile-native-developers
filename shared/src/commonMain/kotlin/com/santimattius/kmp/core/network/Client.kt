@@ -1,4 +1,4 @@
-package com.santimattius.kmp.data.network
+package com.santimattius.kmp.core.network
 
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation

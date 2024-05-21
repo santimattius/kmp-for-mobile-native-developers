@@ -1,6 +1,6 @@
 package com.santimattius.kmp.unit.data.sources
 
-import com.santimattius.kmp.data.sources.CharacterLocalDataSource
+import com.santimattius.kmp.core.sources.CharacterLocalDataSource
 import com.santimattius.kmp.domain.Character
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

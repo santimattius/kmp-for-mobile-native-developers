@@ -1,6 +1,4 @@
-rootProject.name = "kmp-for-mobile-native-developers"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
     repositories {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
@@ -18,5 +16,6 @@ dependencyResolutionManagement {
     }
 }
 
+rootProject.name = "kmp-for-mobile-native-developers"
 include(":composeApp")
 include(":shared")

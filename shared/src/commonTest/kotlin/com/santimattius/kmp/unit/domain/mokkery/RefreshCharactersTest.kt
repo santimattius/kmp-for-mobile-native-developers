@@ -1,15 +1,14 @@
 package com.santimattius.kmp.unit.domain.mokkery
 
-import com.santimattius.kmp.data.CharacterRepository
+import com.santimattius.kmp.core.CharacterRepository
 import com.santimattius.kmp.unit.data.network.CharactersResponseMother
-import com.santimattius.kmp.data.sources.CharacterNetworkDataSource
+import com.santimattius.kmp.core.sources.CharacterNetworkDataSource
 import com.santimattius.kmp.unit.data.sources.InMemoryCharacterLocalDataSource
 import com.santimattius.kmp.domain.RefreshCharacters
 import app.cash.turbine.test
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
 import dev.mokkery.mock
-import dev.mokkery.verify.VerifyMode
 import dev.mokkery.verify.VerifyMode.Companion.exactly
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.test.runTest

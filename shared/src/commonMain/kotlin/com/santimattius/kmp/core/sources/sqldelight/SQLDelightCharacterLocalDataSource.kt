@@ -1,11 +1,11 @@
-package com.santimattius.kmp.data.sources.sqldelight
+package com.santimattius.kmp.core.sources.sqldelight
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.santimattius.kmp.CharactersDatabase
-import com.santimattius.kmp.data.asDomainModel
-import com.santimattius.kmp.data.asDomainsModels
-import com.santimattius.kmp.data.sources.CharacterLocalDataSource
+import com.santimattius.kmp.core.asDomainModel
+import com.santimattius.kmp.core.asDomainsModels
+import com.santimattius.kmp.core.sources.CharacterLocalDataSource
 import com.santimattius.kmp.domain.Character
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

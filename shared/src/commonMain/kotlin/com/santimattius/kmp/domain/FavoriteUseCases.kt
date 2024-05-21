@@ -1,6 +1,6 @@
 package com.santimattius.kmp.domain
 
-import com.santimattius.kmp.data.CharacterRepository
+import com.santimattius.kmp.core.CharacterRepository
 
 class AddToFavorite(
     private val repository: CharacterRepository,

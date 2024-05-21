@@ -1,4 +1,4 @@
-package com.santimattius.kmp.data.db
+package com.santimattius.kmp.core.db
 
 import android.content.Context
 import app.cash.sqldelight.db.SqlDriver

@@ -2,10 +2,10 @@ package com.santimattius.kmp.integration.domain
 
 import app.cash.turbine.test
 import com.santimattius.kmp.JsonLoader
-import com.santimattius.kmp.data.CharacterRepository
-import com.santimattius.kmp.data.db.createDatabase
-import com.santimattius.kmp.data.sources.ktor.KtorCharacterNetworkDataSource
-import com.santimattius.kmp.data.sources.sqldelight.SQLDelightCharacterLocalDataSource
+import com.santimattius.kmp.core.CharacterRepository
+import com.santimattius.kmp.core.db.createDatabase
+import com.santimattius.kmp.core.sources.ktor.KtorCharacterNetworkDataSource
+import com.santimattius.kmp.core.sources.sqldelight.SQLDelightCharacterLocalDataSource
 import com.santimattius.kmp.domain.RefreshCharacters
 import com.santimattius.kmp.integration.data.db.testDbDriver
 import com.santimattius.kmp.integration.data.network.MockClient

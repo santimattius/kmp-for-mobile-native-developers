@@ -1,7 +1,6 @@
-package com.santimattius.kmp.data.sources
+package com.santimattius.kmp.core.sources
 
-import com.santimattius.kmp.data.NetworkCharacter
-import com.santimattius.kmp.domain.Character
+import com.santimattius.kmp.core.NetworkCharacter
 
 interface CharacterNetworkDataSource {
     suspend fun find(id: Long): Result<NetworkCharacter>

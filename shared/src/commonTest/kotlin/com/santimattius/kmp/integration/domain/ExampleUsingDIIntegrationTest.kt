@@ -2,17 +2,18 @@ package com.santimattius.kmp.integration.domain
 
 import app.cash.turbine.test
 import com.santimattius.kmp.JsonLoader
-import com.santimattius.kmp.data.sources.CharacterLocalDataSource
+import com.santimattius.kmp.core.sources.CharacterLocalDataSource
+import com.santimattius.kmp.di.DataBases
 import com.santimattius.kmp.di.sharedModule
 import com.santimattius.kmp.domain.RefreshCharacters
 import com.santimattius.kmp.integration.data.network.MockClient
 import com.santimattius.kmp.integration.data.network.MockResponse
 import com.santimattius.kmp.integration.di.stopTestKoin
 import com.santimattius.kmp.integration.di.testPlatformModule
-import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
+import org.koin.core.qualifier.named
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import kotlin.test.AfterTest
@@ -45,7 +46,7 @@ class ExampleUsingDIIntegrationTest : KoinTest {
     fun `When I call refresh update the local storage`() = runTest {
         //Given
         val useCase = get<RefreshCharacters>()
-        val localDataSource = get<CharacterLocalDataSource>()
+        val localDataSource = get<CharacterLocalDataSource>(named(DataBases.SQLDELIGHT))
         val response = MockResponse.ok(jsonResponse)
         mockClient.setResponse(response)
         //When
@@ -60,7 +61,7 @@ class ExampleUsingDIIntegrationTest : KoinTest {
     fun `When the service returns an empty response`() = runTest {
         //Given
         val useCase = get<RefreshCharacters>()
-        val localDataSource = get<CharacterLocalDataSource>()
+        val localDataSource = get<CharacterLocalDataSource>(named(DataBases.SQLDELIGHT))
         val response = MockResponse.default()
         mockClient.setResponse(response)
         //When

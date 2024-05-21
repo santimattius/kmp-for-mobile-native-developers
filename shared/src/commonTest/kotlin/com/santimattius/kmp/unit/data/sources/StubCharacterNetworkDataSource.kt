@@ -1,7 +1,7 @@
 package com.santimattius.kmp.unit.data.sources
 
-import com.santimattius.kmp.data.NetworkCharacter
-import com.santimattius.kmp.data.sources.CharacterNetworkDataSource
+import com.santimattius.kmp.core.NetworkCharacter
+import com.santimattius.kmp.core.sources.CharacterNetworkDataSource
 
 class StubCharacterNetworkDataSource(
     private val characters: MutableList<NetworkCharacter> = mutableListOf()

@@ -2,10 +2,9 @@ package com.santimattius.kmp.unit.domain
 
 import app.cash.turbine.test
 import com.santimattius.kmp.JsonLoader
-import com.santimattius.kmp.data.CharacterRepository
-import com.santimattius.kmp.data.CharactersResponse
+import com.santimattius.kmp.core.CharacterRepository
+import com.santimattius.kmp.core.CharactersResponse
 import com.santimattius.kmp.domain.RefreshCharacters
-import com.santimattius.kmp.unit.data.sources.FakeCharacterNetworkDataSource
 import com.santimattius.kmp.unit.data.sources.InMemoryCharacterLocalDataSource
 import com.santimattius.kmp.unit.data.sources.StubCharacterNetworkDataSource
 import kotlinx.coroutines.test.runTest
