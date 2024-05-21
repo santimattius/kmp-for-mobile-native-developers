@@ -18,6 +18,5 @@ fun getRoomDatabase(
 ): AppDatabase {
     return builder
         .setQueryCoroutineContext(dispatcher)
-        .setDriver(BundledSQLiteDriver())
         .build()
 }

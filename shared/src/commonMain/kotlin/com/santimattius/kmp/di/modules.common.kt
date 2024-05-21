@@ -1,5 +1,6 @@
 package com.santimattius.kmp.di
 
+import androidx.room.RoomDatabase
 import app.cash.sqldelight.db.SqlDriver
 import com.santimattius.kmp.CharactersDatabase
 import com.santimattius.kmp.core.CharacterRepository
@@ -35,7 +36,7 @@ val sharedModule = module {
     single<CharacterNetworkDataSource> { KtorCharacterNetworkDataSource(get<HttpClient>()) }
 
     single<CharactersDatabase> { createDatabase(get<SqlDriver>()) }
-    single<AppDatabase> { getRoomDatabase(builder = get<RoomBuilder>().builder()) }
+    single<AppDatabase> { getRoomDatabase(builder = get<RoomDatabase.Builder<AppDatabase>>()) }
 
     single<CharacterLocalDataSource>(named(DataBases.SQLDELIGHT)) {
         SQLDelightCharacterLocalDataSource(

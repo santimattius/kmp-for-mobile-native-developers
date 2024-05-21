@@ -87,11 +87,15 @@ kotlin {
         }
 
 
-        val androidTest = sourceSets.getByName("androidUnitTest") {
+        val androidUnitTest = sourceSets.getByName("androidUnitTest") {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation(libs.junit)
                 implementation(libs.sqldelight.jvm)
+                implementation(libs.androidx.core)
+                implementation(libs.androidx.junit.ktx)
+                implementation(libs.androidx.runner)
+                implementation(libs.robolectric)
             }
         }
 
@@ -100,6 +104,9 @@ kotlin {
             implementation(libs.sqldelight.ios.driver)
 
         }
+    }
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 }
 
@@ -141,11 +148,18 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    testOptions{
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+
 }
 
 room {

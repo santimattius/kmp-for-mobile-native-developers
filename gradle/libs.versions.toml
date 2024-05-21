@@ -1,7 +1,10 @@
 [versions]
 agp = "8.2.0"
+core = "1.5.0"
 kotlin = "1.9.23"
 ksp = "1.9.23-1.0.19"
+robolectric = "4.12"
+runner = "1.5.2"
 sqldelightVersion = "2.0.1"
 skieVersion = "0.6.4"
 kotestVersion = "5.8.1"
@@ -20,7 +23,7 @@ androidxNavigationCompose = "2.8.0-beta01"
 androidxLifecycle = "2.8.0"
 
 kotlinxCoroutines = "1.8.0"
-ktorVersion = "2.3.10"
+ktorVersion = "2.3.11"
 
 koinVersion = "3.5.6"
 coilCompose = "2.6.0"
@@ -31,9 +34,12 @@ sqlite = "2.5.0-SNAPSHOT"
 junit = "4.13.2"
 kotestFrameworkEngine = "5.8.1"
 turbine = "1.1.0"
+junitKtx = "1.1.5"
 
 [libraries]
 ## Kotlin
+androidx-core = { module = "androidx.test:core", version.ref = "core" }
+androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotestFrameworkEngine" }
@@ -75,6 +81,7 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorVersion" }
 
 ## SQLDelight
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelightVersion" }
 sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelightVersion" }
 sqldelight-ios-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelightVersion" }
@@ -95,6 +102,7 @@ koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinVersion" }
 #Test
 resource-test = { module = "com.goncalossilva:resources", version.ref = "testResourceVersion" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
