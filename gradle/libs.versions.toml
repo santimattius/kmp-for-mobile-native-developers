@@ -1,8 +1,8 @@
 [versions]
-agp = "8.2.0"
+agp = "8.2.2"
 core = "1.5.0"
 kotlin = "1.9.23"
-ksp = "1.9.23-1.0.19"
+ksp = "1.9.23-1.0.20"
 robolectric = "4.12"
 runner = "1.5.2"
 sqldelightVersion = "2.0.1"
@@ -38,8 +38,6 @@ junitKtx = "1.1.5"
 
 [libraries]
 ## Kotlin
-androidx-core = { module = "androidx.test:core", version.ref = "core" }
-androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotestFrameworkEngine" }
@@ -81,7 +79,6 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorVersion" }
 
 ## SQLDelight
-robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelightVersion" }
 sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelightVersion" }
 sqldelight-ios-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelightVersion" }
@@ -103,6 +100,9 @@ koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinVersion" }
 resource-test = { module = "com.goncalossilva:resources", version.ref = "testResourceVersion" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+androidx-core = { module = "androidx.test:core", version.ref = "core" }
+androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

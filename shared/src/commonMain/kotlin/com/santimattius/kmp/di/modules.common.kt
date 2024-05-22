@@ -5,13 +5,12 @@ import app.cash.sqldelight.db.SqlDriver
 import com.santimattius.kmp.CharactersDatabase
 import com.santimattius.kmp.core.CharacterRepository
 import com.santimattius.kmp.core.db.AppDatabase
-import com.santimattius.kmp.core.db.RoomBuilder
 import com.santimattius.kmp.core.db.createDatabase
 import com.santimattius.kmp.core.db.getRoomDatabase
 import com.santimattius.kmp.core.network.apiClient
 import com.santimattius.kmp.core.sources.CharacterLocalDataSource
 import com.santimattius.kmp.core.sources.CharacterNetworkDataSource
-import com.santimattius.kmp.core.sources.RoomCharacterLocalDataSource
+import com.santimattius.kmp.core.sources.room.RoomCharacterLocalDataSource
 import com.santimattius.kmp.core.sources.ktor.KtorCharacterNetworkDataSource
 import com.santimattius.kmp.core.sources.sqldelight.SQLDelightCharacterLocalDataSource
 import com.santimattius.kmp.domain.AddToFavorite

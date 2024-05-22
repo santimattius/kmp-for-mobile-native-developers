@@ -1,6 +1,7 @@
-package com.santimattius.kmp.core.sources
+package com.santimattius.kmp.core.sources.room
 
 import com.santimattius.kmp.core.db.CharacterDao
+import com.santimattius.kmp.core.sources.CharacterLocalDataSource
 import com.santimattius.kmp.core.toCharacter
 import com.santimattius.kmp.core.toLocalCharacter
 import com.santimattius.kmp.core.toCharacters
