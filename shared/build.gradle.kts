@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kotest)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.kover)
+    alias(libs.plugins.dokka)
 }
 
 kotlin {

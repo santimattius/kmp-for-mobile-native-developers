@@ -1,12 +1,13 @@
 [versions]
 agp = "8.2.2"
-kotlin = "1.9.23"
+kotlin = "2.0.0"
 sqldelightVersion = "2.0.1"
-skieVersion = "0.6.4"
+skieVersion = "0.8.0"
 kotestVersion = "5.8.1"
 testResourceVersion = "0.4.1"
-mokkeryVersion = "1.9.23-1.7.0"
+mokkeryVersion = "2.0.0-RC1"
 koverVersion = "0.7.6"
+dokkaVersion = "1.9.20"
 
 android-compileSdk = "34"
 android-minSdk = "24"
@@ -15,11 +16,11 @@ android-targetSdk = "34"
 androidxComposeCompiler = "1.5.12"
 androidxActivity = "1.9.0"
 androidxComposeBom = "2024.05.00"
-androidxNavigationCompose = "2.8.0-alpha08"
-androidxLifecycle = "2.8.0-rc01"
+androidxNavigationCompose = "2.8.0-beta01"
+androidxLifecycle = "2.8.0"
 
-kotlinxCoroutines = "1.8.0"
-ktorVersion = "2.3.10"
+kotlinxCoroutines = "1.8.1"
+ktorVersion = "2.3.11"
 
 koinVersion = "3.5.6"
 coilCompose = "2.6.0"
@@ -91,9 +92,11 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelightVersion" }
 skie = { id = "co.touchlab.skie", version.ref = "skieVersion" }
 test-resources = { id = "com.goncalossilva.resources", version.ref = "testResourceVersion" }
 kotest = { id = "io.kotest.multiplatform", version.ref = "kotestVersion" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkeryVersion" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref="koverVersion" }
+dokka = { id = "org.jetbrains.dokka", version.ref="dokkaVersion" }
