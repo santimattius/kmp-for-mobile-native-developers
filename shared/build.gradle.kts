@@ -1,5 +1,5 @@
-import kotlinx.kover.gradle.plugin.dsl.AggregationType
-import kotlinx.kover.gradle.plugin.dsl.MetricType
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -15,11 +15,12 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_1_8.toString()
-            }
+    applyDefaultHierarchyTemplate()
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    compilerOptions {
+        androidTarget {
+            // compilerOptions DSL: https://kotl.in/u1r8ln
+            compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
 
@@ -31,14 +32,6 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
-        }
-    }
-
-    targets.all {
-        compilations.all {
-            kotlinOptions {
-                verbose = true
-            }
         }
     }
 
@@ -54,6 +47,7 @@ kotlin {
 
             implementation(libs.koin.core)
 
+            implementation(libs.kotlinx.collections.immutable)
             implementation(libs.androidx.lifecycle.viewmodel)
 
         }
@@ -106,23 +100,20 @@ sqldelight {
 
 }
 
-koverReport {
-    verify {
-        rule("Basic Line Coverage") {
-            isEnabled = true
-            bound {
-                minValue = 80 // Minimum coverage percentage
-                maxValue = 100 // Maximum coverage percentage (optional)
-                metric = MetricType.LINE
-                aggregation = AggregationType.COVERED_PERCENTAGE
+kover {
+    reports{
+        verify {
+            rule("Basic Line Coverage") {
+                bound {
+                    minValue = 80 // Minimum coverage percentage
+                    maxValue = 100 // Maximum coverage percentage (optional)
+                }
             }
-        }
 
-        rule("Branch Coverage") {
-            isEnabled = true
-            bound {
-                minValue = 70 // Minimum coverage percentage for branches
-                metric = MetricType.BRANCH
+            rule("Branch Coverage") {
+                bound {
+                    minValue = 70 // Minimum coverage percentage for branches
+                }
             }
         }
     }

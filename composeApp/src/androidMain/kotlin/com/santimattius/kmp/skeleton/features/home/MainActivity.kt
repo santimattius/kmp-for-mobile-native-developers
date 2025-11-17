@@ -11,6 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.santimattius.kmp.skeleton.core.theme.AppContainer
 import com.santimattius.kmp.skeleton.features.favorites.FavoritesActivity
 import com.santimattius.kmp.viewmodels.CharactersViewModel
+import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
@@ -39,6 +40,6 @@ fun MainScreenRoute(
 @Composable
 fun AppAndroidPreview() {
     AppContainer {
-        HomeScreen(data = emptyList())
+        HomeScreen(data = persistentListOf())
     }
 }

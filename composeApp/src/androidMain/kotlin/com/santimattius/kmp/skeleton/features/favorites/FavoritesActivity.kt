@@ -10,6 +10,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.santimattius.kmp.skeleton.core.theme.AppContainer
 import com.santimattius.kmp.skeleton.features.home.HomeScreen
 import com.santimattius.kmp.viewmodels.FavoritesViewModel
+import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
 
 class FavoritesActivity : ComponentActivity() {
@@ -23,6 +24,7 @@ class FavoritesActivity : ComponentActivity() {
     }
 }
 
+@Suppress("ParamsComparedByRef")
 @Composable
 fun FavoritesScreenRoute(
     viewModel: FavoritesViewModel = koinViewModel(),
@@ -36,6 +38,6 @@ fun FavoritesScreenRoute(
 @Composable
 fun FavoritesPreview() {
     AppContainer {
-        HomeScreen(data = emptyList())
+        HomeScreen(data = persistentListOf())
     }
 }

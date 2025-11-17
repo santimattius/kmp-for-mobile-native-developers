@@ -19,6 +19,7 @@ class CharacterRepository(
     val allCharacters: Flow<List<Character>>
         get() = local.all
 
+
     val allFavoritesCharacters: Flow<List<Character>>
         get() = local.favorites
 

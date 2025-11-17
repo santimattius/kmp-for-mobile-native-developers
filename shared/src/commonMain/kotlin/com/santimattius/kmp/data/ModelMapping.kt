@@ -9,6 +9,7 @@ fun NetworkCharacter.asDomainModel(): Character {
 }
 
 fun List<CharacterEntity>.asDomainsModels() = this.map { it.asDomainModel() }
+
 fun CharacterEntity.asDomainModel(): Character {
     return Character(id, name, image, favorite ?: false)
 }

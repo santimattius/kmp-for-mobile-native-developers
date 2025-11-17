@@ -32,10 +32,11 @@ import com.santimattius.kmp.skeleton.core.theme.AppContainer
 import com.santimattius.kmp.skeleton.core.ui.AppBar
 import com.santimattius.kmp.skeleton.core.ui.AppBarIcon
 import com.santimattius.kmp.skeleton.core.ui.AppBarIconModel
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun HomeScreen(
-    data: List<Character>,
+    data: ImmutableList<Character>,
     onClick: (Character) -> Unit = {},
     onFavorite: (Character) -> Unit = {},
     goToFavorite: () -> Unit = {}
@@ -67,7 +68,7 @@ fun HomeScreen(
 
 @Composable
 private fun GridOfCharacters(
-    characters: List<Character>,
+    characters: ImmutableList<Character>,
     padding: PaddingValues,
     onClick: (Character) -> Unit = {},
     onFavorite: (Character) -> Unit = {},

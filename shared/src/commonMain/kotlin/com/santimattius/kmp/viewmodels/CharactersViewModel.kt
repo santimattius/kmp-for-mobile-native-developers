@@ -7,6 +7,7 @@ import com.santimattius.kmp.domain.Character
 import com.santimattius.kmp.domain.GetAllCharacters
 import com.santimattius.kmp.domain.RefreshCharacters
 import com.santimattius.kmp.domain.RemoveFromFavorites
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -26,7 +27,7 @@ class CharactersViewModel(
     var characters = getAllCharacters().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(1000L),
-        initialValue = emptyList()
+        initialValue = persistentListOf()
     )
 
     init {

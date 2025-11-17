@@ -35,10 +35,11 @@ import com.santimattius.kmp.skeleton.R
 import com.santimattius.kmp.skeleton.core.ui.AppBar
 import com.santimattius.kmp.skeleton.core.ui.AppBarIconModel
 import com.santimattius.kmp.skeleton.core.ui.Center
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun FavoritesScreen(
-    data: List<Character>,
+    data: ImmutableList<Character>,
     onClick: (Character) -> Unit = {},
     onFavoriteClick: (Character) -> Unit = {},
     onBackClick: () -> Unit = {},
@@ -75,7 +76,7 @@ fun FavoritesScreen(
 
 @Composable
 private fun ListOfFavorites(
-    characters: List<Character>,
+    characters: ImmutableList<Character>,
     padding: PaddingValues,
     onClick: (Character) -> Unit = {},
     onFavoriteClick: (Character) -> Unit = {}
