@@ -22,7 +22,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CharactersViewModelTest {
+class  CharactersViewModelTest {
 
     private val networkDataSource = FakeCharacterNetworkDataSource()
     private val localDataSource = InMemoryCharacterLocalDataSource()

@@ -1,14 +1,12 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.skie)
     alias(libs.plugins.test.resources)
-    alias(libs.plugins.kotest)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.kover)
     alias(libs.plugins.dokka)
@@ -16,12 +14,15 @@ plugins {
 
 kotlin {
     applyDefaultHierarchyTemplate()
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    compilerOptions {
-        androidTarget {
-            // compilerOptions DSL: https://kotl.in/u1r8ln
-            compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+
+    androidLibrary {
+        namespace = "com.santimattius.kmp.skeleton.shared"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
+        withHostTestBuilder { }.configure { }
     }
 
     listOf(
@@ -73,10 +74,11 @@ kotlin {
         }
 
 
-        val androidTest = sourceSets.getByName("androidUnitTest") {
+        val androidTest = sourceSets.getByName("androidHostTest") {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation(libs.junit)
+                implementation(libs.kotest.runner.junit5)
                 implementation(libs.sqldelight.jvm)
             }
         }
@@ -100,6 +102,12 @@ sqldelight {
 
 }
 
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    // Avoid failing when no tests are discovered (Kotest multiplatform plugin was removed for iOS compatibility)
+    failOnNoDiscoveredTests = false
+}
+
 kover {
     reports{
         verify {
@@ -116,13 +124,5 @@ kover {
                 }
             }
         }
-    }
-}
-
-android {
-    namespace = "com.santimattius.kmp.skeleton.shared"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }

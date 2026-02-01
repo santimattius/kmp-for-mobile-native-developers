@@ -1,14 +1,14 @@
 [versions]
-agp = "8.13.1"
-kotlin = "2.2.21"
+agp = "9.0.0"
+kotlin = "2.3.0"
 kotlinxCollectionsImmutable = "0.4.0"
 materialIconsCore = "1.7.8"
-sqldelightVersion = "2.1.0"
-skieVersion = "0.10.8"
+sqldelightVersion = "2.2.1"
+skieVersion = "0.10.9"
 kotestVersion = "5.9.1"
-testResourceVersion = "0.10.1"
-mokkeryVersion = "2.10.2"
-koverVersion = "0.9.3"
+testResourceVersion = "0.14.4"
+mokkeryVersion = "3.1.1"
+koverVersion = "0.9.5"
 dokkaVersion = "2.1.0"
 
 android-compileSdk = "36"
@@ -16,19 +16,19 @@ android-minSdk = "24"
 android-targetSdk = "36"
 
 androidxComposeCompiler = "1.5.12"
-androidxActivity = "1.11.0"
-androidxComposeBom = "2025.11.00"
-androidxNavigationCompose = "2.9.6"
-androidxLifecycle = "2.9.4"
+androidxActivity = "1.12.3"
+androidxComposeBom = "2026.01.01"
+androidxNavigationCompose = "2.9.7"
+androidxLifecycle = "2.10.0"
 
 kotlinxCoroutines = "1.10.2"
-ktorVersion = "3.3.2"
+ktorVersion = "3.4.0"
 
 koinVersion = "4.1.1"
 coilCompose = "2.7.0"
 
 junit = "4.13.2"
-kotestFrameworkEngine = "6.0.4"
+kotestFrameworkEngine = "6.1.2"
 turbine = "1.2.1"
 
 [libraries]
@@ -36,6 +36,7 @@ turbine = "1.2.1"
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotestFrameworkEngine" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotestFrameworkEngine" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
@@ -94,6 +95,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

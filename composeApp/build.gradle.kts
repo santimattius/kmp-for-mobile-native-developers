@@ -1,29 +1,11 @@
-@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
-
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.compose.compiler)
-}
-kotlin {
-    compilerOptions {
-        androidTarget {
-            // compilerOptions DSL: https://kotl.in/u1r8ln
-            compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
-        }
-    }
 }
 
 android {
     namespace = "com.santimattius.kmp.skeleton"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         applicationId = "com.santimattius.kmp.skeleton"
@@ -53,12 +35,10 @@ android {
 }
 
 composeCompiler {
-    enableStrongSkippingMode = true
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
 }
 
 dependencies {
-
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlinx.collections.immutable)
     implementation(platform(libs.androidx.compose.bom))
@@ -83,4 +63,3 @@ dependencies {
 
     implementation(projects.shared)
 }
-
