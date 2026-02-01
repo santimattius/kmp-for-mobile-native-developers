@@ -7,6 +7,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
+/**
+ * In-memory [CharacterLocalDataSource] for unit tests.
+ *
+ * [refresh] updates both [all] and [favorites] flows so that collectors see favorite changes
+ * (add/remove) and list updates (insert). Use with ViewModel tests that assert on flow emissions.
+ */
 class InMemoryCharacterLocalDataSource : CharacterLocalDataSource {
 
     private val mutex = Mutex()

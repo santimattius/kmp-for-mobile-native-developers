@@ -84,16 +84,20 @@ class CharactersViewModelTest {
         runTest(testDispatcher) {
             // Given: ViewModel with data; pick a character that is not favorite
             viewModel.characters.test {
-                val list = awaitItem()
-                assertTrue(list.isNotEmpty())
-                val character = list.first()
-                assertFalse(character.isFavorite)
-                // When
-                viewModel.addToFavorites(character)
-                // Then: flow emits updated list with character marked favorite
-                val updatedList = awaitItem()
-                val updated = updatedList.first { it.id == character.id }
-                assertTrue(updated.isFavorite)
+                try {
+                    val list = awaitItem()
+                    assertTrue(list.isNotEmpty())
+                    val character = list.first()
+                    assertFalse(character.isFavorite)
+                    // When
+                    viewModel.addToFavorites(character)
+                    // Then: flow emits updated list with character marked favorite
+                    val updatedList = awaitItem()
+                    val updated = updatedList.first { it.id == character.id }
+                    assertTrue(updated.isFavorite)
+                } finally {
+                    cancelAndIgnoreRemainingEvents()
+                }
             }
         }
     }
