@@ -19,10 +19,10 @@ import kotlinx.coroutines.test.setMain
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class  CharactersViewModelTest {
+class CharactersViewModelTest {
 
     private val networkDataSource = FakeCharacterNetworkDataSource()
     private val localDataSource = InMemoryCharacterLocalDataSource()
@@ -53,10 +53,13 @@ class  CharactersViewModelTest {
     }
 
     @Test
-    fun firstTest() {
+    fun `given default fakes when ViewModel is created then characters flow emits non empty list`() {
         runTest(testDispatcher) {
+            // Given: ViewModel with FakeCharacterNetworkDataSource (characters.json)
+            // When: init triggers refresh
             viewModel.characters.test {
-                assertEquals(true, awaitItem().isNotEmpty())
+                // Then
+                assertTrue(awaitItem().isNotEmpty())
             }
         }
     }

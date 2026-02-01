@@ -13,18 +13,18 @@ import com.santimattius.kmp.integration.data.network.MockResponse
 import com.santimattius.kmp.integration.data.network.testKtorClient
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class RefreshCharactersIntegrationTest {
 
     private val jsonResponse = JsonLoader.load("characters.json")
 
-    //KtorClient setup
+    // KtorClient setup
     private val mockClient = MockClient()
     private val ktorClient = testKtorClient(mockClient)
     private val networkDataSource = KtorCharacterNetworkDataSource(ktorClient)
 
-    //SQLDelight setup
+    // SQLDelight setup
     private val sqlDriver = testDbDriver()
     private val db = createDatabase(driver = sqlDriver)
     private val localDataSource = SQLDelightCharacterLocalDataSource(db)
@@ -33,28 +33,28 @@ class RefreshCharactersIntegrationTest {
     private val refreshCharacters = RefreshCharacters(repository)
 
     @Test
-    fun `When I call refresh update the local storage`() = runTest {
-        //Given
+    fun `given mock returns characters JSON when refreshCharacters is invoked then local storage is updated`() = runTest {
+        // Given
         val response = MockResponse.ok(jsonResponse)
         mockClient.setResponse(response)
-        //When
+        // When
         refreshCharacters.invoke()
-        //Then
+        // Then
         localDataSource.all.test {
-            assertEquals(true, awaitItem().isNotEmpty())
+            assertTrue(awaitItem().isNotEmpty())
         }
     }
 
     @Test
-    fun `When the service returns an empty response`() = runTest {
-        //Given
+    fun `given mock returns empty response when refreshCharacters is invoked then local storage is empty`() = runTest {
+        // Given
         val response = MockResponse.default()
         mockClient.setResponse(response)
-        //When
+        // When
         refreshCharacters.invoke()
-
+        // Then
         localDataSource.all.test {
-            assertEquals(true, awaitItem().isEmpty())
+            assertTrue(awaitItem().isEmpty())
         }
     }
 }

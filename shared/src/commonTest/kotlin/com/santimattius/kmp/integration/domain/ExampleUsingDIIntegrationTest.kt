@@ -9,7 +9,6 @@ import com.santimattius.kmp.integration.data.network.MockClient
 import com.santimattius.kmp.integration.data.network.MockResponse
 import com.santimattius.kmp.integration.di.stopTestKoin
 import com.santimattius.kmp.integration.di.testPlatformModule
-import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
@@ -18,7 +17,7 @@ import org.koin.test.inject
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class ExampleUsingDIIntegrationTest : KoinTest {
 
@@ -42,32 +41,32 @@ class ExampleUsingDIIntegrationTest : KoinTest {
     }
 
     @Test
-    fun `When I call refresh update the local storage`() = runTest {
-        //Given
+    fun `given Koin and mock returns characters when RefreshCharacters is invoked then local storage is updated`() = runTest {
+        // Given
         val useCase = get<RefreshCharacters>()
         val localDataSource = get<CharacterLocalDataSource>()
         val response = MockResponse.ok(jsonResponse)
         mockClient.setResponse(response)
-        //When
+        // When
         useCase.invoke()
-        //Then
+        // Then
         localDataSource.all.test {
-            assertEquals(true, awaitItem().isNotEmpty())
+            assertTrue(awaitItem().isNotEmpty())
         }
     }
 
     @Test
-    fun `When the service returns an empty response`() = runTest {
-        //Given
+    fun `given Koin and mock returns empty when RefreshCharacters is invoked then local storage is empty`() = runTest {
+        // Given
         val useCase = get<RefreshCharacters>()
         val localDataSource = get<CharacterLocalDataSource>()
         val response = MockResponse.default()
         mockClient.setResponse(response)
-        //When
+        // When
         useCase.invoke()
-
+        // Then
         localDataSource.all.test {
-            assertEquals(true, awaitItem().isEmpty())
+            assertTrue(awaitItem().isEmpty())
         }
     }
 }

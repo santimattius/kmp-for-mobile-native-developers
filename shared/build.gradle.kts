@@ -59,7 +59,6 @@ kotlin {
             implementation(libs.resource.test)
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.turbine)
-            implementation(libs.kotest.framework.engine)
 
             implementation(libs.ktor.client.mock)
 
@@ -76,9 +75,9 @@ kotlin {
 
         val androidTest = sourceSets.getByName("androidHostTest") {
             dependencies {
-                implementation(kotlin("test-junit"))
-                implementation(libs.junit)
-                implementation(libs.kotest.runner.junit5)
+                implementation(libs.kotlin.test.junit5)
+                implementation(libs.junit.jupiter)
+                implementation(libs.junit.platform.launcher)
                 implementation(libs.sqldelight.jvm)
             }
         }
@@ -104,8 +103,8 @@ sqldelight {
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
-    // Avoid failing when no tests are discovered (Kotest multiplatform plugin was removed for iOS compatibility)
     failOnNoDiscoveredTests = false
+    // Filter with Gradle: --tests "com.santimattius.kmp.**" (use ** for subpackages)
 }
 
 kover {
