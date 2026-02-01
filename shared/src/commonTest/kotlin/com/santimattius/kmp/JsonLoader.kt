@@ -10,7 +10,7 @@ object JsonLoader {
     }
 
     fun load(file: String): String {
-        val loader = Resource("src/commonTest/resources/${file}")
+        val loader = Resource(file)
         return loader.readText()
     }
 

@@ -14,8 +14,11 @@ class CheckModulesTest : KoinTest {
     }
 
     @Test
-    fun `validate modules`() {
+    fun `given test and shared modules when Koin is started then all module definitions resolve successfully`() {
+        // Given: testPlatformModule + sharedModule
+        // When
         startTestKoin(testPlatformModule)
             .checkModules()
+        // Then: no unresolved dependencies (checkModules throws on failure)
     }
 }

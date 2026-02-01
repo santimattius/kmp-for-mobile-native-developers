@@ -1,14 +1,12 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.skie)
     alias(libs.plugins.test.resources)
-    alias(libs.plugins.kotest)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.kover)
     alias(libs.plugins.dokka)
@@ -16,12 +14,15 @@ plugins {
 
 kotlin {
     applyDefaultHierarchyTemplate()
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    compilerOptions {
-        androidTarget {
-            // compilerOptions DSL: https://kotl.in/u1r8ln
-            compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+
+    androidLibrary {
+        namespace = "com.santimattius.kmp.skeleton.shared"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
+        withHostTestBuilder { }.configure { }
     }
 
     listOf(
@@ -58,7 +59,6 @@ kotlin {
             implementation(libs.resource.test)
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.turbine)
-            implementation(libs.kotest.framework.engine)
 
             implementation(libs.ktor.client.mock)
 
@@ -73,10 +73,11 @@ kotlin {
         }
 
 
-        val androidTest = sourceSets.getByName("androidUnitTest") {
+        val androidTest = sourceSets.getByName("androidHostTest") {
             dependencies {
-                implementation(kotlin("test-junit"))
-                implementation(libs.junit)
+                implementation(libs.kotlin.test.junit5)
+                implementation(libs.junit.jupiter)
+                implementation(libs.junit.platform.launcher)
                 implementation(libs.sqldelight.jvm)
             }
         }
@@ -100,6 +101,12 @@ sqldelight {
 
 }
 
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    failOnNoDiscoveredTests = false
+    // Filter with Gradle: --tests "com.santimattius.kmp.**" (use ** for subpackages)
+}
+
 kover {
     reports{
         verify {
@@ -116,13 +123,5 @@ kover {
                 }
             }
         }
-    }
-}
-
-android {
-    namespace = "com.santimattius.kmp.skeleton.shared"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
