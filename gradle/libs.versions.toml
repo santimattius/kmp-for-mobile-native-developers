@@ -1,13 +1,13 @@
 [versions]
-agp = "9.0.0"
-kotlin = "2.3.0"
+agp = "9.1.0"
+kotlin = "2.3.10"
 kotlinxCollectionsImmutable = "0.4.0"
 materialIconsCore = "1.7.8"
 sqldelightVersion = "2.2.1"
-skieVersion = "0.10.9"
-testResourceVersion = "0.14.4"
-mokkeryVersion = "3.1.1"
-koverVersion = "0.9.5"
+skieVersion = "0.10.10"
+testResourceVersion = "0.15.0"
+mokkeryVersion = "3.2.0"
+koverVersion = "0.9.7"
 dokkaVersion = "2.1.0"
 
 android-compileSdk = "36"
@@ -15,19 +15,19 @@ android-minSdk = "24"
 android-targetSdk = "36"
 
 androidxComposeCompiler = "1.5.12"
-androidxActivity = "1.12.3"
-androidxComposeBom = "2026.01.01"
+androidxActivity = "1.12.4"
+androidxComposeBom = "2026.02.01"
 androidxNavigationCompose = "2.9.7"
 androidxLifecycle = "2.10.0"
 
 kotlinxCoroutines = "1.10.2"
-ktorVersion = "3.4.0"
+ktorVersion = "3.4.1"
 
 koinVersion = "4.1.1"
 coilCompose = "2.7.0"
 
 junit = "4.13.2"
-junit5 = "5.10.2"
+junit5 = "6.0.3"
 turbine = "1.2.1"
 
 [libraries]
@@ -35,7 +35,7 @@ turbine = "1.2.1"
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { module = "junit:junit", version.ref = "junit" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "1.10.2" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "6.0.3" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
